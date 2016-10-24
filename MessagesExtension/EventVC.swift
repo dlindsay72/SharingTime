@@ -17,7 +17,7 @@ class EventVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var dates = [Date]()
     var allVotes = [Int]()
     var ourVotes = [Int]()
-    
+    weak var delegate: MessagesViewController!
     
 
     override func viewDidLoad() {
@@ -82,6 +82,13 @@ class EventVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func saveSelectedDates(_ sender: AnyObject) {
+        var finalVotes = [Int]()
+        
+        for (index, votes) in allVotes.enumerated() {
+            finalVotes.append(votes + ourVotes[index])
+        }
+        
+        delegate.createMessage(with: dates, votes: finalVotes)
     }
     
     @IBAction func addDate(_ sender: AnyObject) {
