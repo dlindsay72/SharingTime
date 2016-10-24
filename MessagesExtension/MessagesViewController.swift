@@ -16,6 +16,10 @@ class MessagesViewController: MSMessagesAppViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func createNewEvent(_ sender: AnyObject) {
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -68,5 +72,7 @@ class MessagesViewController: MSMessagesAppViewController {
     
         // Use this method to finalize any behaviors associated with the change in presentation style.
     }
+    
+    
 
 }

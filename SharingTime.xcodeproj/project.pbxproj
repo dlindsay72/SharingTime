@@ -13,6 +13,7 @@
 		7B0996831DBE67E200C9CC74 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0996821DBE67E200C9CC74 /* MessagesViewController.swift */; };
 		7B0996861DBE67E200C9CC74 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B0996841DBE67E200C9CC74 /* MainInterface.storyboard */; };
 		7B0996881DBE67E200C9CC74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B0996871DBE67E200C9CC74 /* Assets.xcassets */; };
+		7B768DB61DBE84890035F19C /* EventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B768DB51DBE84890035F19C /* EventVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		7B0996851DBE67E200C9CC74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		7B0996871DBE67E200C9CC74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B0996891DBE67E200C9CC74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B768DB51DBE84890035F19C /* EventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			children = (
 				7B0996821DBE67E200C9CC74 /* MessagesViewController.swift */,
 				7B0996841DBE67E200C9CC74 /* MainInterface.storyboard */,
+				7B768DB51DBE84890035F19C /* EventVC.swift */,
 				7B0996871DBE67E200C9CC74 /* Assets.xcassets */,
 				7B0996891DBE67E200C9CC74 /* Info.plist */,
 			);
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B0996831DBE67E200C9CC74 /* MessagesViewController.swift in Sources */,
+				7B768DB61DBE84890035F19C /* EventVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +409,7 @@
 				7B09968E1DBE67E200C9CC74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B0996901DBE67E200C9CC74 /* Build configuration list for PBXNativeTarget "SharingTime" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +418,7 @@
 				7B0996921DBE67E200C9CC74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

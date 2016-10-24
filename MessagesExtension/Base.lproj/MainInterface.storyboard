@@ -24,6 +24,9 @@
                                     <constraint firstAttribute="height" constant="44" id="ZCv-aq-fjf"/>
                                 </constraints>
                                 <state key="normal" title="Create New Event"/>
+                                <connections>
+                                    <action selector="createNewEvent:" destination="ObA-dk-sSI" eventType="touchUpInside" id="Ev9-tT-5GI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="-78" y="88"/>
         </scene>
-        <!--View Controller-->
+        <!--EventVC-->
         <scene sceneID="7nF-la-miq">
             <objects>
-                <viewController storyboardIdentifier="CreateEvent" id="4hJ-xm-0bP" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateEvent" id="4hJ-xm-0bP" customClass="EventVC" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2nG-FZ-lEg"/>
                         <viewControllerLayoutGuide type="bottom" id="IhC-3R-36s"/>
@@ -58,11 +61,11 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JNF-21-pk7" id="frp-5i-TQg">
-                                            <frame key="frameInset" width="343" height="43.5"/>
+                                            <frame key="frameInset" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fe8-NC-Q8l">
-                                                    <frame key="frameInset" minX="15" width="313" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="313" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -72,11 +75,18 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4hJ-xm-0bP" id="znH-Rx-uGc"/>
+                                    <outlet property="delegate" destination="4hJ-xm-0bP" id="aEd-aK-lS5"/>
+                                </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="DSG-Nc-jwl">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rCo-yo-Y66">
                                         <state key="normal" title="Add Date"/>
+                                        <connections>
+                                            <action selector="addDate:" destination="4hJ-xm-0bP" eventType="touchUpInside" id="tRs-qo-uOG"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moT-Kc-fd9">
                                         <constraints>
@@ -84,6 +94,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveSelectedDates:" destination="4hJ-xm-0bP" eventType="touchUpInside" id="E2j-3a-Idl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -119,10 +132,88 @@
                             <constraint firstAttribute="trailingMargin" secondItem="OR1-st-bGS" secondAttribute="trailing" id="yfq-8V-7Yi"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="N31-x8-rEu" id="bnU-ha-cah"/>
+                        <outlet property="tableView" destination="74Z-I9-F4C" id="XVI-MP-WBX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5r-6g-51b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="589.60000000000002" y="99.400299850074973"/>
+        </scene>
+        <!--EventVC-->
+        <scene sceneID="ofR-qJ-E0Y">
+            <objects>
+                <viewController storyboardIdentifier="SelectDates" id="12m-md-AMb" customClass="EventVC" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Iu-j4-OOS"/>
+                        <viewControllerLayoutGuide type="bottom" id="pcH-Yu-xHI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4hT-Qp-ioF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Gw-af-xBr">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="UTX-AE-ApR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveSelectedDates:" destination="12m-md-AMb" eventType="touchUpInside" id="Twu-Z3-Xqe"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lqd-9e-VId">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Date" textLabel="lPj-Ls-igr" detailTextLabel="LaE-vq-nt2" style="IBUITableViewCellStyleSubtitle" id="2pl-eI-LPn">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2pl-eI-LPn" id="6Jx-la-nYK">
+                                            <frame key="frameInset" width="343" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lPj-Ls-igr">
+                                                    <frame key="frameInset" minX="15" minY="4" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LaE-vq-nt2">
+                                                    <frame key="frameInset" minX="15" minY="25" width="44" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="12m-md-AMb" id="ud5-wm-mTp"/>
+                                    <outlet property="delegate" destination="12m-md-AMb" id="W1b-6Y-szG"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lqd-9e-VId" firstAttribute="top" secondItem="4hT-Qp-ioF" secondAttribute="topMargin" constant="20" id="1F8-VH-pH1"/>
+                            <constraint firstItem="Lqd-9e-VId" firstAttribute="leading" secondItem="4hT-Qp-ioF" secondAttribute="leadingMargin" id="I26-LW-8tu"/>
+                            <constraint firstItem="pcH-Yu-xHI" firstAttribute="top" secondItem="8Gw-af-xBr" secondAttribute="bottom" constant="20" id="Mus-BV-AKs"/>
+                            <constraint firstItem="8Gw-af-xBr" firstAttribute="top" secondItem="Lqd-9e-VId" secondAttribute="bottom" constant="26" id="dwH-K2-RSJ"/>
+                            <constraint firstItem="8Gw-af-xBr" firstAttribute="centerX" secondItem="4hT-Qp-ioF" secondAttribute="centerX" id="hzP-nq-7s1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Lqd-9e-VId" secondAttribute="trailing" id="q7Q-9s-0cI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Lqd-9e-VId" id="tgP-xP-FFD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ob1-LP-VDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1428" y="91.304347826086968"/>
         </scene>
     </scenes>
 </document>
