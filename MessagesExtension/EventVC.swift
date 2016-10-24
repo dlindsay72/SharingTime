@@ -12,9 +12,11 @@ class EventVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    var dates = [Date]()
+    var allVotes = [Int]()
+    var ourVotes = [Int]()
     
     
 
@@ -32,26 +34,87 @@ class EventVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //1 - deque the cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Date", for: indexPath)
-        cell.textLabel?.text = "Date goes here"
+        
+        //2 - pull out the corresponding date and format it neatly
+        let date = dates[indexPath.row]
+        cell.textLabel?.text = DateFormatter.localizedString(from: date, dateStyle: .long, timeStyle: .short)
+        
+        //3 - add a checkmark if we voted for this date
+        if ourVotes[indexPath.row] == 1 {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        
+        //4 - add a vote if other people voted for this date
+        if allVotes[indexPath.row] > 0 {
+            cell.detailTextLabel?.text = "Votes: \(allVotes[indexPath.row])"
+        } else {
+            cell.detailTextLabel?.text = ""
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return dates.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if cell.accessoryType == .checkmark {
+                cell.accessoryType = .none
+                ourVotes[indexPath.row] = 0
+            } else {
+                cell.accessoryType = .checkmark
+                ourVotes[indexPath.row] = 1
+            }
+        }
+    }
     
     @IBAction func saveSelectedDates(_ sender: AnyObject) {
     }
     
     @IBAction func addDate(_ sender: AnyObject) {
+        
+        //1 - add to the arrays
+        dates.append(datePicker.date)
+        allVotes.append(0)
+        ourVotes.append(1)
+        
+        //2 - insert a row in the table using animation
+        let newIndexpath = IndexPath(row: dates.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexpath], with: .automatic)
+        
+        //3 - scroll the new row into view
+        tableView.scrollToRow(at: newIndexpath, at: .bottom, animated: true)
+        
+        //4 - flash the scroll bars so the user know something has changed
+        tableView.flashScrollIndicators()
     }
     
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
