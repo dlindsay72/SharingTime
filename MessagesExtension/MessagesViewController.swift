@@ -28,6 +28,8 @@ class MessagesViewController: MSMessagesAppViewController {
         //1 - create the child view controller
         guard let vc = storyboard?.instantiateViewController(withIdentifier: identifier) as? EventVC else { return }
         
+        vc.load(from: conversation.selectedMessage)
+        
         vc.delegate = self
         //2 - add the child to the parent so that events are forwarded
         addChildViewController(vc)
@@ -65,6 +67,7 @@ class MessagesViewController: MSMessagesAppViewController {
             
             let voteItem = URLQueryItem(name: "vote-\(index)", value: String(votes[index]))
             items.append(voteItem)
+            
         }
         
         components.queryItems = items
@@ -78,6 +81,7 @@ class MessagesViewController: MSMessagesAppViewController {
         
         //6 - create a blank, default message layout
         let layout = MSMessageTemplateLayout()
+        layout.caption = "I voted"
         message.layout = layout
         
         //7 - insert it into the conversation
@@ -110,6 +114,9 @@ class MessagesViewController: MSMessagesAppViewController {
         // This will happen when the extension is about to present UI.
         
         // Use this method to configure the extension and restore previously stored state.
+        if presentationStyle == .expanded {
+            displayEventController(converstation: conversation, identifier: "SelectDates")
+        }
     }
     
     override func didResignActive(with conversation: MSConversation) {
